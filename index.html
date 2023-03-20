@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="style.css">
+  <title>E-commerce product page</title>
+</head>
+<body>
+<!-- Desktop Version -->
+<div class="desktop-version">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <img src="./images/logo.svg" alt="Logo" id="logo">
+    <ul class="list">
+      <li class="list-item list-item-1">Collections</li>
+      <li class="list-item list-item-2">Men</li>
+      <li class="list-item list-item-3">Woman</li>
+      <li class="list-item list-item-4">About</li>
+      <li class="list-item list-item-5">Contact</li>
+    </ul>
+    <!-- Container with profile and the cart -->
+    <div class="profile-cart">
+      <img src="./images/icon-cart.svg" alt="cart" id="Cart">
+      <!-- product list menu -->
+      <div class="Product-List">
+        <div class="heading"><h4>Cart</h4></div>
+        <hr>
+        <p id="Placeholder">Your Cart is Empty</p>
+        <div class="order-Summary"></div>
+      </div>
+      <img src="./images/image-avatar.png" alt="avatar" id="avatar">  
+    </div>
+  </nav>
+  <hr id="horizontal-line">
+
+  <!-- main sec -->
+  <div class="container">
+
+    <!-- Left Section image gallery -->
+    <div class="showcase">
+      <!-- The primary image -->
+      <div class="big">
+        <img src="images/image-product-1.jpg" class="bigImg">
+      </div>
+      <!-- The list of images underneath the primary image -->
+      <div class="image-list">
+        <span class="cover">
+          <img class="img active" src="./images/image-product-1.jpg" alt="">
+        </span>
+        <span class="cover">
+          <img class="img " src="./images/image-product-2.jpg" alt="">
+        </span>
+        <span class="cover">
+          <img class="img " src="./images/image-product-3.jpg" alt="">
+        </span>
+        <span class="cover">
+          <img class="img " src="./images/image-product-4.jpg" alt="">
+        </span>
+      </div>
+    </div>
+
+    <!-- Right Section containing description , and add-to-cart -->
+    <div class="description">
+      <h4 id="heading">SNEAKER COMPANY</h4>
+      <h1 class="title">Fall Limited Edition Sneakers</h1>
+      <p id="content">These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they'll withstand everything the weather can offer.
+      </p>
+      <!-- Area to show the price of the product -->
+      <div class="price-container">
+        <div id="price">
+          <p id="dollar">$</p><p id="amount">0</p>
+        </div>
+        <!-- The area to add items and add-to-cart -->
+        <div class="add-to-cart">
+          <!-- The area to add and less the order -->
+          <div class="order-number">
+            <!-- Minus -->
+            <img src="./images/icon-minus.svg"  id="Less" alt="">
+            <p id="Quantity">0</p>
+            <!-- Plus -->
+            <img src="./images/icon-plus.svg" id="Add" alt="">
+          </div>
+          <!-- Add to Cart Button -->
+          <button class="btn btn-Cart"><img id="target" src="./images/icon-cart.svg" alt="">Add to cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
