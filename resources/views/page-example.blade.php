@@ -1,4 +1,4 @@
-@extends('back.page.page-layout')
+@extends('back.pages.page-layout')
 
 @section('title','page example')
 

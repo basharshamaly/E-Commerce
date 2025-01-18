@@ -3,13 +3,13 @@
 	<head>
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
-		<title>E-Commerce @yield('title')</title>
+		<title>E-Commerce <?php echo $__env->yieldContent('title'); ?></title>
 
 		<!-- Site favicon -->
 		<link
 			rel="apple-touch-icon"
 			sizes="180x180"
-			href="/images/site/{{$settings->site_favicon ?? ""}}"
+			href="/images/site/<?php echo e($settings->site_favicon ?? ""); ?>"
 		/>
 
 
@@ -54,8 +54,9 @@
                 height: auto;
             }
         </style>
-    @livewireStyles
-	@stack('styles')
+    <?php echo \Livewire\Livewire::styles(); ?>
+
+	<?php echo $__env->yieldPushContent('styles'); ?>
 
 	</head>
 	<body class="login-page">
@@ -66,17 +67,17 @@
 			>
 				<div class="brand-logo">
 					<a href="login.html">
-                        <img src="/images/site/{{$settings->site_logo ?? ""}}" alt="" class="dark-logo logo-size" />
+                        <img src="/images/site/<?php echo e($settings->site_logo ?? ""); ?>" alt="" class="dark-logo logo-size" />
 
-						{{-- <img src="/back/vendors/images/deskapp-logo.svg" alt="" /> --}}
+						
 					</a>
 				</div>
 				<div class="login-menu">
 					<ul>
-                        @if(!Route::is('admin.*'))
+                        <?php if(!Route::is('admin.*')): ?>
                         <li><a href="register.html">Register</a></li>
 
-                        @endif
+                        <?php endif; ?>
 					</ul>
 				</div>
 			</div>
@@ -86,7 +87,7 @@
 		>
 
 			<div class="container">
-                @yield('content')
+                <?php echo $__env->yieldContent('content'); ?>
 
 			</div>
 		</div>
@@ -118,7 +119,9 @@
         </script>
 
 
-        @livewireScripts
-        @stack('scripts')
+        <?php echo \Livewire\Livewire::scripts(); ?>
+
+        <?php echo $__env->yieldPushContent('scripts'); ?>
 	</body>
 </html>
+<?php /**PATH D:\all think proparite laravel\E-Commerce\e-commerce\resources\views/back/layout/auth-layout.blade.php ENDPATH**/ ?>

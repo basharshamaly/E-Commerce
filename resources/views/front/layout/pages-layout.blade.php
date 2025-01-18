@@ -14,6 +14,8 @@
   <meta name="description" content="Bootstrap 5 Fashion Store HTML CSS Template">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <link rel="stylesheet" type="text/css" href="/front/css/vendor.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
   <link rel="stylesheet" type="text/css" href="/front/style.css">
@@ -23,7 +25,32 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Marcellus&display=swap"
     rel="stylesheet">
-    
+    <style>
+                    .dropdown:hover > .dropdown-menu {
+            display: block;
+            }
+
+
+            .dropdown-menu {
+            z-index: 1050;
+            }
+            .dropdown-menu .dropdown-menu {
+        margin-left: 0.1rem; /* Optional for alignment */
+        margin-right: 0.1rem; /* Optional for alignment */
+        position: absolute;
+            left: 100%;
+            top: 0;
+            margin-top: -0.5rem; /* Adjust spacing */
+            display: none;
+    }
+    .dropdown-menu .dropdown-submenu:hover > .dropdown-menu {
+    display: block; /* Show submenu on hover */
+}
+
+
+
+    </style>
+
     @livewireStyles()
     @stack('style')
 </head>
@@ -55,12 +82,12 @@
 <symbol xmlns="http://www.w3.org/2000/svg" id="githup_url" viewBox="0 0 24 24">
     <image href="path/to/github-logo.png" width="24" height="24" />
   </symbol>
-  
+
   <!-- أيقونة LinkedIn -->
   <symbol xmlns="http://www.w3.org/2000/svg" id="linkedin_url" viewBox="0 0 24 24">
     <image href="path/to/linkedin-logo.png" width="24" height="24" />
   </symbol>
-  
+
       <symbol xmlns="http://www.w3.org/2000/svg" id="dribble" viewBox="0 0 15 15">
         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
           d="M4.839 1.024c3.346 4.041 5.096 7.922 5.704 12.782M.533 6.82c5.985-.138 9.402-1.083 11.97-4.216M2.7 12.594c3.221-4.902 7.171-5.65 11.755-4.293M14.5 7.5a7 7 0 1 0-14 0a7 7 0 0 0 14 0Z" />
@@ -180,7 +207,7 @@
       </form>
 
 
-     
+
 
     </div>
   </div>
@@ -189,209 +216,157 @@
     <div class="offcanvas-header justify-content-center">
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-   
+
   </div>
 
   <nav class="navbar navbar-expand-lg bg-light text-uppercase fs-6 p-3 border-bottom align-items-center">
     <div class="container-fluid">
-      <div class="row justify-content-between align-items-center w-100">
-
-        <div class="col-auto">
-          <a class="navbar-brand text-white" href="/">
-            <img src="/images/site/{{$settings->site_logo}}" alt="logo" style="width: 80px;height: 100px;object-fit: contain;">
-
-          </a>
-        </div>
-
-        <div class="col-auto">
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
-              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                aria-label="Close"></button>
+        <div class="row justify-content-between align-items-center w-100">
+            <div class="col-auto">
+                <a class="navbar-brand text-white" href="/">
+                    <img src="/images/site/{{$settings->site_logo}}" alt="logo" style="width: 80px;height: 100px;object-fit: contain;">
+                </a>
             </div>
+            <div class="col-auto">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 gap-1 gap-md-5 pe-3">
+                            <!-- Home Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle active" href="#" id="dropdownHome" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
+                                <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownHome">
+                                    <li><a href="index.html" class="dropdown-item item-anchor">Home Layout 1</a></li>
+                                    <li><a href="index.html" class="dropdown-item item-anchor">Home Layout 2</a></li>
+                                    <li><a href="index.html" class="dropdown-item item-anchor">Home Layout 3</a></li>
+                                    <li><a href="index.html" class="dropdown-item item-anchor">Home Layout 4</a></li>
+                                </ul>
+                            </li>
+                            <!-- Shop Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownShop" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+                                <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownShop">
+                                    <li><a href="index.html" class="dropdown-item item-anchor">Shop Sidebar</a></li>
+                                    <li><a href="index.html" class="dropdown-item item-anchor">Shop Three Column</a></li>
+                                    <li><a href="index.html" class="dropdown-item item-anchor">Shop Four Column</a></li>
+                                    <li><a href="index.html" class="dropdown-item item-anchor">Single Product</a></li>
+                                </ul>
+                            </li>
+                            <!-- Categories Dropdown -->
+                            <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="dropdownCategory" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+                              <ul class="dropdown-menu" aria-labelledby="dropdownCategory">
+                                  <!-- Category 1 -->
+                                  <li class="dropdown">
+                                      <a class="dropdown-item dropdown-toggle" href="#" id="dropdownCategory1" data-bs-toggle="dropdown" aria-expanded="false">
+                                          Category 1
+                                      </a>
+                                      <ul class="dropdown-menu" aria-labelledby="dropdownCategory1">
+                                          <li class="dropdown">
+                                              <a class="dropdown-item dropdown-toggle" href="#" id="subcategory1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                  Subcategory 1
+                                              </a>
+                                              <ul class="dropdown-menu" aria-labelledby="subcategory1">
+                                                  <li><a href="#" class="dropdown-item">Child Subcategory 1</a></li>
+                                                  <li><a href="#" class="dropdown-item">Child Subcategory 2</a></li>
+                                              </ul>
+                                          </li>
+                                          <li><a href="#" class="dropdown-item">Subcategory 2</a></li>
+                                      </ul>
+                                  </li>
 
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 gap-1 gap-md-5 pe-3">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle active" href="#" id="dropdownHome" data-bs-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Home</a>
-                  <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownHome">
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Home Layout 1</a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Home Layout 2 </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Home Layout 3 </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Home Layout 4 </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="dropdownShop" data-bs-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Shop</a>
-                  <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownShop">
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Shop Sidebar </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Shop Three Column </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Shop Three Column Wide </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Shop Four Column </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Shop Four Column Wide </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Shop Six Column </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Shop Six Column Wide </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Single Product </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Single Product V2 </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="dropdownBlog" data-bs-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Blog</a>
-                  <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownBlog">
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Blog Classic </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Blog Grid with Sidebar </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Blog Grid Four Column </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Blog No Sidebar </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Blog Right Sidebar </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Single Post </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Single Post No Sidebar </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="dropdownPages" data-bs-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Pages</a>
-                  <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownPages">
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">About </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Cart </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Checkout </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Coming Soon </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Contact </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Error Page </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">FAQs </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">My Account </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Order Tracking </a>
-                    </li>
-                    <li>
-                      <a href="index.html" class="dropdown-item item-anchor">Wishlist </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Contact</a>
-                </li>
-              </ul>
+                                  <!-- Category 2 -->
+                                  <li class="dropdown">
+                                      <a class="dropdown-item dropdown-toggle" href="#" id="dropdownCategory2" data-bs-toggle="dropdown" aria-expanded="false">
+                                          Category 2
+                                      </a>
+                                      <ul class="dropdown-menu" aria-labelledby="dropdownCategory2">
+                                          <li class="dropdown">
+                                              <a class="dropdown-item dropdown-toggle" href="#" id="subcategory3" data-bs-toggle="dropdown" aria-expanded="false">
+                                                  Subcategory 3
+                                              </a>
+                                              <ul class="dropdown-menu" aria-labelledby="subcategory3">
+                                                  <li><a href="#" class="dropdown-item">Child Subcategory 3</a></li>
+                                                  <li><a href="#" class="dropdown-item">Child Subcategory 4</a></li>
+                                              </ul>
+                                          </li>
+                                          <li><a href="#" class="dropdown-item">Subcategory 4</a></li>
+                                      </ul>
+                                  </li>
+                              </ul>
+                            </li>
+
+                            <!-- Blog Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownBlog" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
+                                <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownBlog">
+                                    <li><a href="index.html" class="dropdown-item item-anchor">Blog Classic</a></li>
+                                    <li><a href="index.html" class="dropdown-item item-anchor">Single Post</a></li>
+                                </ul>
+                            </li>
+                            <!-- Pages Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownPages" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                                <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownPages">
+                                    <li><a href="index.html" class="dropdown-item item-anchor">About</a></li>
+                                    <li><a href="index.html" class="dropdown-item item-anchor">Contact</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="col-3 col-lg-auto">
+                <ul class="list-unstyled d-flex m-0">
+                    <li class="d-none d-lg-block">
+                        <a href="index.html" class="text-uppercase mx-3">Wishlist <span class="wishlist-count">(0)</span></a>
+                    </li>
+                    <li class="d-none d-lg-block">
+                        <a href="index.html" class="text-uppercase mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">Cart <span class="cart-count">(0)</span></a>
+                    </li>
+                    <li class="d-lg-none">
+                        <a href="#" class="mx-2">
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <use xlink:href="#heart"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="d-lg-none">
+                        <a href="#" class="mx-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <use xlink:href="#cart"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="search-box" class="mx-2">
+                        <a href="#search" class="search-button">
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <use xlink:href="#search"></use>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-
-        <div class="col-3 col-lg-auto">
-          <ul class="list-unstyled d-flex m-0">
-            <li class="d-none d-lg-block">
-              <a href="index.html" class="text-uppercase mx-3">Wishlist <span class="wishlist-count">(0)</span>
-              </a>
-            </li>
-            <li class="d-none d-lg-block">
-              <a href="index.html" class="text-uppercase mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                aria-controls="offcanvasCart">Cart <span class="cart-count">(0)</span>
-              </a>
-            </li>
-            <li class="d-lg-none">
-              <a href="#" class="mx-2">
-                <svg width="24" height="24" viewBox="0 0 24 24">
-                  <use xlink:href="#heart"></use>
-                </svg>
-              </a>
-            </li>
-            <li class="d-lg-none">
-              <a href="#" class="mx-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                aria-controls="offcanvasCart">
-                <svg width="24" height="24" viewBox="0 0 24 24">
-                  <use xlink:href="#cart"></use>
-                </svg>
-              </a>
-            </li>
-            <li class="search-box" class="mx-2">
-              <a href="#search" class="search-button">
-                <svg width="24" height="24" viewBox="0 0 24 24">
-                  <use xlink:href="#search"></use>
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-
     </div>
-  </nav>
+</nav>
 
   @include('front.layout.inc.header')
 
-     
+
 
      @yield('content')
   {{-- @include('front.layout.inc.content') --}}
- 
+
 
  @include('front.layout.inc.footer')
   <script src="/front/js/jquery.min.js"></script>
@@ -402,6 +377,8 @@
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <script src="/front/js/script.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
   @livewireScripts()
   @stack('scripts')
 </body>
