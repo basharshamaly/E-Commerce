@@ -13,6 +13,8 @@ class CatSubCategoriesList extends Component
     protected $listeners = [
         'updateCategoriesOrdering',
         'deleteCategories',
+        'updateSubCategoriesOrdering',
+        'updateChildSubCategoriesOrdering'
     ];
 
     public function deleteCategories($category_id)
@@ -44,6 +46,32 @@ class CatSubCategoriesList extends Component
             ]);
         }
         $this->showToastr('success', 'ordering categories succefuly');
+    }
+    public function updateChildSubCategoriesOrdering($positions)
+    {
+
+
+        foreach ($positions as $position) {
+            $index = $position[0];
+            $newposition = $position[1];
+            SubCategory::where('id', $index)->update([
+                'ordering' => $newposition,
+            ]);
+        }
+        $this->showToastr('success', 'ordering ChildSubCategoriesOrdering  succefuly');
+    }
+    public function updateSubCategoriesOrdering($positions)
+    {
+
+
+        foreach ($positions as $position) {
+            $index = $position[0];
+            $newposition = $position[1];
+            SubCategory::where('id', $index)->update([
+                'ordering' => $newposition,
+            ]);
+        }
+        $this->showToastr('success', 'ordering subcategories succefuly');
     }
 
     public function showToastr($type, $message)

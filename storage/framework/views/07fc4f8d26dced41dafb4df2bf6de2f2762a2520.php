@@ -91,9 +91,9 @@
                                 <th>actions</th>
                             </tr>
                         </thead>
-                        <tbody class="table-border-bottom-0">
+                        <tbody class="table-border-bottom-0" id="subcategories_sortable">
                             <?php $__empty_1 = true; $__currentLoopData = $subcategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subcategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                            <tr>
+                            <tr data-index="<?php echo e($subcategory->id); ?>" data-ordering="<?php echo e($subcategory->ordering); ?>">
                                 <td>
                                     <?php echo e($subcategory->subcategory_name); ?>
 
@@ -104,9 +104,9 @@
                                 </td>
                                 <td>
                                     <?php if($subcategory->childSubCategory->count() > 0): ?>
-                                        <ul class="list-group">
+                                        <ul class="list-group" id="child_subcategories_sortable">
                                             <?php $__currentLoopData = $subcategory->childSubCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <li class="d-flex justify-content-between align-items-center">
+                                                <li class="d-flex justify-content-between align-items-center" data-index="<?php echo e($item->id); ?>" data-ordering="<?php echo e($item->ordering); ?>">
                                                     <?php echo e($item->subcategory_name); ?>
 
                                                     <div>
@@ -125,13 +125,13 @@
                                         <span>None</span>
                                     <?php endif; ?>
                                 </td>
-                                
+
                                 <td>
                                     <div class="table-actions">
                                         <a href="<?php echo e(route('admin.category.edit-subcategory',['id'=>$subcategory->id])); ?>" class="text-primary">
                                             <i class="dw dw-edit-2"></i>
                                         </a>
-                                   
+
                                         <a href="" class="text-danger">
                                             <i class="dw dw-delete-2"></i>
                                         </a>
@@ -144,7 +144,7 @@
                             </td>
 
                             <?php endif; ?>
-                       
+
                         </tbody>
 
                      </table>

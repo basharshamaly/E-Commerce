@@ -42,6 +42,6 @@ class SubCategory extends Model
 
     public function childSubCategory()
     {
-        return $this->hasMany(SubCategory::class, 'Is_Child_Category', 'id');
+        return $this->hasMany(SubCategory::class, 'Is_Child_Category', 'id')->orderBy('ordering', 'asc');
     }
 }

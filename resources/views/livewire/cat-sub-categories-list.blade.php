@@ -90,9 +90,9 @@
                                 <th>actions</th>
                             </tr>
                         </thead>
-                        <tbody class="table-border-bottom-0">
+                        <tbody class="table-border-bottom-0" id="subcategories_sortable">
                             @forelse($subcategories as $subcategory)
-                            <tr>
+                            <tr data-index="{{ $subcategory->id }}" data-ordering="{{$subcategory->ordering}}">
                                 <td>
                                     {{$subcategory->subcategory_name}}
                                 </td>
@@ -101,9 +101,9 @@
                                 </td>
                                 <td>
                                     @if ($subcategory->childSubCategory->count() > 0)
-                                        <ul class="list-group">
+                                        <ul class="list-group" id="child_subcategories_sortable">
                                             @foreach ($subcategory->childSubCategory as $item)
-                                                <li class="d-flex justify-content-between align-items-center">
+                                                <li class="d-flex justify-content-between align-items-center" data-index="{{$item->id}}" data-ordering="{{$item->ordering}}">
                                                     {{ $item->subcategory_name }}
                                                     <div>
                                                         <a href="{{ route('admin.category.edit-subcategory',['id'=>$item->id]) }}" class="text-primary" data-toggle="tooltip" title="Edit child subcategory name">
@@ -121,13 +121,13 @@
                                         <span>None</span>
                                     @endif
                                 </td>
-                                
+
                                 <td>
                                     <div class="table-actions">
                                         <a href="{{ route('admin.category.edit-subcategory',['id'=>$subcategory->id]) }}" class="text-primary">
                                             <i class="dw dw-edit-2"></i>
                                         </a>
-                                   
+
                                         <a href="" class="text-danger">
                                             <i class="dw dw-delete-2"></i>
                                         </a>
@@ -140,7 +140,7 @@
                             </td>
 
                             @endforelse
-                       
+
                         </tbody>
 
                      </table>
