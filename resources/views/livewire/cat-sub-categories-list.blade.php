@@ -86,7 +86,7 @@
                                     Sub Category Name
                                 </th>
                                 <th>Category Name</th>
-                                <th>N. of child sub categories</th>
+                                <th>Child SubCategory Name</th>
                                 <th>actions</th>
                             </tr>
                         </thead>
@@ -100,15 +100,36 @@
                                     {{ $subcategory->category->category_name }}
                                 </td>
                                 <td>
-                                    {{ $subcategory->childSubCategory->count() }}
+                                    @if ($subcategory->childSubCategory->count() > 0)
+                                        <ul class="list-group">
+                                            @foreach ($subcategory->childSubCategory as $item)
+                                                <li class="d-flex justify-content-between align-items-center">
+                                                    {{ $item->subcategory_name }}
+                                                    <div>
+                                                        <a href="{{ route('admin.category.edit-subcategory',['id'=>$item->id]) }}" class="text-primary" data-toggle="tooltip" title="Edit child subcategory name">
+                                                            Edit
+                                                        </a>
+                                                        |
+                                                        <a href="#" class="text-danger" data-toggle="tooltip" title="Delete child subcategory name">
+                                                            Delete
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        <span>None</span>
+                                    @endif
                                 </td>
+                                
                                 <td>
                                     <div class="table-actions">
-                                        <a href="" class="text-primary">
+                                        <a href="{{ route('admin.category.edit-subcategory',['id'=>$subcategory->id]) }}" class="text-primary">
                                             <i class="dw dw-edit-2"></i>
                                         </a>
+                                   
                                         <a href="" class="text-danger">
-                                            <i class="dw dw-edit-2"></i>
+                                            <i class="dw dw-delete-2"></i>
                                         </a>
                                     </div>
                                 </td>

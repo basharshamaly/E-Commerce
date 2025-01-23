@@ -30,6 +30,9 @@ Route::prefix('/admin')->name('admin.')->group(function () {
                 //routes sub categories
                 Route::get('/add-subcategory', 'addSubCategory')->name('add-subcategory');
                 Route::post('/store-subcategory', 'storeSubCategory')->name('store-subcategory');
+
+                Route::get('/edit-subcategory/{id}', 'editSubCategory')->name('edit-subcategory');
+                Route::put('/update-subcategory/{id}', 'updateSubCategory')->name('update-subcategory');
             });
         });
     });

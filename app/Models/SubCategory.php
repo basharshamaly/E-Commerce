@@ -16,7 +16,6 @@ class SubCategory extends Model
     protected $fillable = [
         'category_id',
         'subcategory_name',
-
         'Is_Child_Category',
         'subcategory_slug',
         'ordering',
@@ -40,6 +39,7 @@ class SubCategory extends Model
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
+
     public function childSubCategory()
     {
         return $this->hasMany(SubCategory::class, 'Is_Child_Category', 'id');

@@ -55,7 +55,7 @@ class CatSubCategoriesList extends Component
     {
         return view('livewire.cat-sub-categories-list', [
             'categories' => Category::orderBy('ordering', 'asc')->get(),
-            'subcategories'=>SubCategory::orderBy('ordering','asc')->get(),
+            'subcategories' => SubCategory::where('Is_Child_Category', 0)->orderBy('ordering', 'asc')->get(),
         ]);
     }
 }

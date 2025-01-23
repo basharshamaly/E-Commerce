@@ -87,7 +87,7 @@
                                     Sub Category Name
                                 </th>
                                 <th>Category Name</th>
-                                <th>N. of child sub categories</th>
+                                <th>Child SubCategory Name</th>
                                 <th>actions</th>
                             </tr>
                         </thead>
@@ -103,16 +103,37 @@
 
                                 </td>
                                 <td>
-                                    <?php echo e($subcategory->childSubCategory->count()); ?>
+                                    <?php if($subcategory->childSubCategory->count() > 0): ?>
+                                        <ul class="list-group">
+                                            <?php $__currentLoopData = $subcategory->childSubCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <li class="d-flex justify-content-between align-items-center">
+                                                    <?php echo e($item->subcategory_name); ?>
 
+                                                    <div>
+                                                        <a href="<?php echo e(route('admin.category.edit-subcategory',['id'=>$item->id])); ?>" class="text-primary" data-toggle="tooltip" title="Edit child subcategory name">
+                                                            Edit
+                                                        </a>
+                                                        |
+                                                        <a href="#" class="text-danger" data-toggle="tooltip" title="Delete child subcategory name">
+                                                            Delete
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </ul>
+                                    <?php else: ?>
+                                        <span>None</span>
+                                    <?php endif; ?>
                                 </td>
+                                
                                 <td>
                                     <div class="table-actions">
-                                        <a href="" class="text-primary">
+                                        <a href="<?php echo e(route('admin.category.edit-subcategory',['id'=>$subcategory->id])); ?>" class="text-primary">
                                             <i class="dw dw-edit-2"></i>
                                         </a>
+                                   
                                         <a href="" class="text-danger">
-                                            <i class="dw dw-edit-2"></i>
+                                            <i class="dw dw-delete-2"></i>
                                         </a>
                                     </div>
                                 </td>

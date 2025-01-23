@@ -174,4 +174,52 @@ class CategoryController extends Controller
                 ->with('fail', 'Failed to add <b>' . ucfirst($request->subcategory_name) . '</b> as a subcategory.');
         }
     }
+
+    public function editSubCategory(Request $request, $id)
+    {
+        $subcategories = SubCategory::findOrFail($id);
+        $ind = SubCategory::where('Is_Child_Category', 0)->get();
+        return view('back.pages.admin.edit-subcategory', [
+            'subcategories' => $subcategories,
+            'categories' => Category::all(),
+            'subcategoryy' => (!empty($ind)) ? $ind : [],
+        ]);
+    }
+
+    public function updateSubCategory(Request $request, $id)
+    {
+        $subcategories = SubCategory::findOrFail($id);
+        $request->validate([
+            'subcategory_name' => 'required|min:5|unique:sub_categories,subcategory_name',
+            'parent_category' => 'required|exists:categories,id',
+
+
+        ], []);
+
+        //check if this subcategory has children
+
+        if ($subcategories->childSubCategory->count() && $request->is_child_of != 0) {
+            return redirect()->route('admin.category.edit-subcategory', $id)->with('fail', 'failed this subcategory has children' . $subcategories->childSubCategory->count() . 'should edit this subcategoryname first');
+        } else {
+            // $subcategories->category_id = $request->parent_category;
+            // $subcategories->subcategory_name = $request->subcategory_name;
+            // $subcategories->subcategory_slug = $request->subcategory_slug;
+            // $subcategories->Is_Child_Category = $request->is_child_of;
+
+
+            $subcategories->category_id = $request->parent_category;
+            $subcategories->subcategory_name = $request->subcategory_name;
+            $subcategories->Is_Child_Category = $request->is_child_of == 0 ? 0 : $request->is_child_of;
+            $subcategories->subcategory_slug = $request->subcategory_slug;
+
+
+
+            $save = $subcategories->save();
+            if ($save) {
+                return redirect()->route('admin.category.edit-subcategory', $id)->with('success', ' updated subcategory successfully' . '<b>' . ucfirst($request->subcategory_name) . '</b>');
+            } else {
+                return redirect()->route('admin.category.edit-subcategory', $id)->with('fail', 'failed updated subcategory');
+            }
+        }
+    }
 }

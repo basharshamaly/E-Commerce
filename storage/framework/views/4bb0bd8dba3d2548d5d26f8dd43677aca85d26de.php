@@ -239,15 +239,15 @@ rel="stylesheet"
              <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('admin-seller-header-profile-info')->html();
-} elseif ($_instance->childHasBeenRendered('54rb1bd')) {
-    $componentId = $_instance->getRenderedChildComponentId('54rb1bd');
-    $componentTag = $_instance->getRenderedChildComponentTagName('54rb1bd');
+} elseif ($_instance->childHasBeenRendered('LgjMKUJ')) {
+    $componentId = $_instance->getRenderedChildComponentId('LgjMKUJ');
+    $componentTag = $_instance->getRenderedChildComponentTagName('LgjMKUJ');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('54rb1bd');
+    $_instance->preserveRenderedChild('LgjMKUJ');
 } else {
     $response = \Livewire\Livewire::mount('admin-seller-header-profile-info');
     $html = $response->html();
-    $_instance->logRenderedChild('54rb1bd', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('LgjMKUJ', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
