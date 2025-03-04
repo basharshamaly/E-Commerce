@@ -39,7 +39,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'category_name' => 'required|min:5|unique:categories,category_name',
-            'category_image' => 'required|image|mimes:png,jpg,svg,jpeg',
+            // 'category_image' => 'required|image|mimes:png,jpg,svg,jpeg',
         ], [
             'category_name.required' => ':Attribute must be required',
             'category_name.min' => ':Attribute must be at least 5 characters',
@@ -135,14 +135,17 @@ class CategoryController extends Controller
         }
     }
 
-    public function addSubCategory(Request $request)
+    public function addSubCategory(Request $request, $id = null)
     {
-        $categories = Category::all();
+        $categories =  Category::all(); // Load category if ID is provided
+        $subcategories_1 = $id ? SubCategory::find($id) : null; // Load category if ID is provided
+
         $independent_subcategory = SubCategory::where('Is_Child_Category', 0)->get();
 
         $data = [
             'categories' => $categories,
             'subcategories' => $independent_subcategory,
+            'subcategories_1' => $subcategories_1
         ];
 
         return view('back.pages.admin.add-subcategory', $data);
@@ -153,25 +156,54 @@ class CategoryController extends Controller
         $request->validate([
             'parent_category' => 'required|exists:categories,id',
             'subcategory_name' => 'required|min:5|unique:sub_categories,subcategory_name',
+            // 'subcategory_image' => 'required|image|mimes:png,jpg,svg,jpeg',
+
         ], [
             'subcategory_name.required' => 'The subcategory name is required.',
             'subcategory_name.min' => 'The subcategory name must be at least 5 characters.',
             'subcategory_name.unique' => 'The subcategory name must be unique.',
             'category_id.required' => 'The parent category is required.',
             'category_id.exists' => 'The selected category must exist in the categories table.',
+            'subcategory_image.required' => ':Attribute must be required',
+            'subcategory_image.image' => ':Attribute must be image',
+            'subcategory_image.mimes' => ':Attribute must be image from type png,jpg,jpeg,svg',
         ]);
 
-        $subcategories = new SubCategory();
-        $subcategories->category_id = $request->parent_category;
-        $subcategories->subcategory_name = $request->subcategory_name;
-        $subcategories->Is_Child_Category = $request->is_child_of == 0 ? 0 : $request->is_child_of;
 
-        if ($subcategories->save()) {
-            return redirect()->route('admin.category.add-subcategory')
-                ->with('success', '<b>' . ucfirst($request->subcategory_name) . '</b> successfully added as a subcategory.');
-        } else {
-            return redirect()->route('admin.category.add-subcategory')
-                ->with('fail', 'Failed to add <b>' . ucfirst($request->subcategory_name) . '</b> as a subcategory.');
+
+        if ($request->hasFile('subcategory_image')) {
+            $path = '/images/subcategories';
+            $file = $request->file('subcategory_image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+
+            // إنشاء المجلد إذا لم يكن موجودًا
+            if (!File::exists(public_path($path))) {
+                File::makeDirectory(public_path($path), 0777, true);
+            }
+
+            // نقل الملف
+            $upload = $file->move(public_path($path), $filename);
+            if ($upload) {
+                // إنشاء الكائن وتخزين البيانات
+
+                $subcategories = new SubCategory();
+                $subcategories->category_id = $request->parent_category;
+                $subcategories->subcategory_name = $request->subcategory_name;
+                $subcategories->subcategory_image = $filename;
+                $subcategories->price = $request->price;
+                $subcategories->Is_Child_Category = $request->is_child_of == 0 ? 0 : $request->is_child_of;
+
+
+
+
+                if ($subcategories->save()) {
+                    return redirect()->route('admin.category.add-subcategory')
+                        ->with('success', '<b>' . ucfirst($request->subcategory_name) . '</b> successfully added as a subcategory.');
+                } else {
+                    return redirect()->route('admin.category.add-subcategory')
+                        ->with('fail', 'Failed to add <b>' . ucfirst($request->subcategory_name) . '</b> as a subcategory.');
+                }
+            }
         }
     }
 

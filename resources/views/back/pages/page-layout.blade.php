@@ -489,6 +489,50 @@ rel="stylesheet"
 						</li>
                         @endif
 
+
+
+                        @if(Route::is('seller.*'))
+
+                        <li class="dropdown">
+							<a href="{{ route('seller.home') }}" class="dropdown-toggle {{ Route::is('seller.home')?'active': '' }}">
+								<span class="micon bi bi-house"></span
+								><span class="mtext">Home</span>
+							</a>
+						</li>
+
+						{{-- <li>
+							<a href="invoice.html" class="dropdown-toggle no-arrow ">
+								<span class="micon bi bi-receipt-cutoff"></span
+								><span class="mtext">Invoice</span>
+							</a>
+						</li> --}}
+						
+{{-- 
+						<li>
+							<div class="sidebar-small-cap">Settings</div>
+						</li> --}}
+
+
+                        {{-- <li>
+							<a href="{{ route('admin.profile') }}" class="dropdown-toggle no-arrow {{Route::Is('admin.profile') ? 'active':''}}">
+								<span class="micon"><i class="fas fa-user"></i>
+                                    </span
+								><span class="mtext">Profile</span>
+							</a>
+						</li>
+                        <li>
+							<a href="{{ route('admin.settings') }}" class="dropdown-toggle no-arrow {{Route::Is('admin.settings') ? 'active':''}}">
+								<span class="micon"><i class="fas fa-cogs"></i>
+                                    </span
+								><span class="mtext">Settings</span>
+							</a>
+						</li> --}}
+                        @endif
+
+
+
+
+
 					</ul>
 				</div>
 			</div>

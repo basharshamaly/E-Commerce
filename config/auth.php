@@ -17,6 +17,10 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
+    // 'defaults' => [
+    //     'guard' => 'seller',
+    //     'passwords' => 'sellers',
+    // ],
 
     'admin' => [
         'driver' => 'eloquent',

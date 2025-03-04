@@ -9,15 +9,15 @@
   <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('cat-sub-categories-list')->html();
-} elseif ($_instance->childHasBeenRendered('3ZHx2Jr')) {
-    $componentId = $_instance->getRenderedChildComponentId('3ZHx2Jr');
-    $componentTag = $_instance->getRenderedChildComponentTagName('3ZHx2Jr');
+} elseif ($_instance->childHasBeenRendered('IEOlrTP')) {
+    $componentId = $_instance->getRenderedChildComponentId('IEOlrTP');
+    $componentTag = $_instance->getRenderedChildComponentTagName('IEOlrTP');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('3ZHx2Jr');
+    $_instance->preserveRenderedChild('IEOlrTP');
 } else {
     $response = \Livewire\Livewire::mount('cat-sub-categories-list');
     $html = $response->html();
-    $_instance->logRenderedChild('3ZHx2Jr', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('IEOlrTP', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -123,6 +123,29 @@ echo $html;
             }
         });
     });
+
+    $(document).on('click','.deleteSubCategory',function(event){
+        event.preventDefault();
+        var subcategory_id=$(this).data('id');
+        var title=$(this).data('title');
+        swal.fire({
+               title:"are you sure to delete this <b>"+title+'</b>',
+               showCancelButton:true,
+               showCloseButton:true,
+               cancelButtonText:'Cancel',
+               confirmButtonText:'yes delete this',
+               cancelButtonColor:'#d33',
+               confirmButtonColor:'#3085d6',
+               width:300,
+               allowOutsideClick:false,
+
+        }).then(function(result){
+            if(result.isConfirmed){
+                window.livewire.emit('deleteSubCategory', subcategory_id);
+            }
+        });
+
+    })
 </script>
 
 

@@ -16,7 +16,7 @@
 					<div class="col-md-6 col-lg-5">
 						<div class="login-box bg-white box-shadow border-radius-10">
 							<div class="login-title">
-								<h2 class="text-center text-primary">Login To DeskApp</h2>
+								<h2 class="text-center text-primary">Login To Dashboard</h2>
 							</div>
 
 							<form action="{{ route('admin.login_Handler') }}" method="POST">

@@ -18,7 +18,7 @@
                     <a href="<?php echo e(route('admin.category.cat-sub-cat-list')); ?>" class="btn btn-primary btn-sm " > <i class="ion-arrow-left-a"></i> Back to categories List </a>
                 </div>
             </div>
-            <form action="<?php echo e(route('admin.category.store-subcategory')); ?>" method="post" class="mt-3">
+            <form action="<?php echo e(route('admin.category.store-subcategory')); ?>" enctype="multipart/form-data" method="POST" class="mt-3">
             <?php echo csrf_field(); ?>
             <?php if(Session::has('success')): ?>
             <div class="alert alert-success">
@@ -79,6 +79,62 @@ endif;
 unset($__errorArgs, $__bag); ?>
                 </div>
             </div>
+
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label for="">Sub_Category Image</label>
+                    <input type="file" name="subcategory_image" id="subcategory_image" placeholder="enter subcategory_image" class="form-control" value="<?php echo e(old('subcategory_image')); ?>">
+                    <?php $__errorArgs = ['subcategory_image'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <span class="text-danger"><?php echo e($message); ?></span>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div class="avatar mb-3 ">
+                    <label class="d-block font-weight-bold mb-2">Current Image</label>
+                    <?php if($subcategories_1 && $subcategories_1->subcategory_image): ?>
+
+                    <img
+                        src="/images/subcategories/<?php echo e($subcategories_1->subcategory_image); ?>"
+                        alt="Sub Category Image Preview"
+                        id="subcategory_image_preview"
+                        class="img-thumbnail"
+                        style="width: 100px; height: 100px; object-fit: cover;"
+                        data-ijabo-default-img="/images/categories/<?php echo e($subcategories_1->subcategory_image); ?>"
+                    >
+                    <?php else: ?>
+                        <p>No subcategory image available</p>
+                        <?php endif; ?>
+                </div>
+            </div>
+
+
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label for="">price</label>
+                    <input type="text" name="price" id="price" placeholder="enter price" class="form-control" value="<?php echo e(old('price')); ?>">
+                    <?php $__errorArgs = ['price'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <span class="text-danger"><?php echo e($message); ?></span>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                </div>
+            </div>
+
+
             <div class="col-md-7">
                 <div class="form-group">
                     <label for="">Is Child Of</label>
@@ -113,6 +169,18 @@ unset($__errorArgs, $__bag); ?>
 
 <?php $__env->startPush('scripts'); ?>
 
+<script>
+    $('input[type="file"][name="subcategory_image"]').ijaboViewer({
+        preview:'#subcategory_image_preview',
+        allowedExtensions:['jpg','png','jpeg','svg'],
+        imageShape:'square',
+        onErrorShape:function(message,element){
+            alert(message);
+        },OnInvalidType:function(message,element){
+            alert(message);
+        },OnSuccess:function(message,element){},
+    })
+   </script>
 <?php $__env->stopPush(); ?>
 
 <?php echo $__env->make('back.pages.page-layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\all think proparite laravel\E-Commerce\e-commerce\resources\views/back/pages/admin/add-subcategory.blade.php ENDPATH**/ ?>

@@ -115,8 +115,8 @@
         <div class="col-md-3 col-sm-6">
           <div class="footer-menu footer-menu-004 border-animation-left">
             <h5 class="widget-title text-uppercase mb-4">Contact Us</h5>
-            <p>Do you have any questions or suggestions? <a href="mailto:{{ $settings->site_email }}"
-                class="item-anchor">{{ $settings->site_email }}</a></p>
+            <p>Do you have any questions or suggestions? <a href="mailto:basharshamaly35@gmail.com"
+                class="item-anchor">basharshamaly35@gmail.com</a></p>
             <p>Do you need support? Give us a call. <a href="tel:+972 59-973-7242" class="item-anchor">+972 59-973-7242
                 </a>
             </p>
@@ -141,9 +141,8 @@
             </div>
           </div>
           <div class="col-md-6 text-end">
-            <p>© Copyright 2022 Kaira. All rights reserved. Design by <a href="https://templatesjungle.com"
-                target="_blank">TemplatesJungle</a> Distribution By <a href="https://themewagon.com"
-              target="blank">ThemeWagon</a></p>
+            <p>© Copyright 2025 Bashar. All rights reserved. Design by <a href="https://templatesjungle.com"
+                target="_blank">TemplatesJungle</a></p>
           </div>
         </div>
       </div>

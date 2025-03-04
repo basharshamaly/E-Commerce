@@ -67,15 +67,22 @@
 			>
 				<div class="brand-logo">
 					<a href="login.html">
-                        <img src="/images/site/<?php echo e($settings->site_logo ?? ""); ?>" alt="" class="dark-logo logo-size" />
+                        
 
-						
+						<img src="/back/vendors/images/deskapp-logo.svg" alt="" />
 					</a>
 				</div>
 				<div class="login-menu">
 					<ul>
                         <?php if(!Route::is('admin.*')): ?>
-                        <li><a href="register.html">Register</a></li>
+                         <?php if(Route::is('seller.login')): ?>
+
+                        <li><a href="<?php echo e(route('seller.register')); ?>">Register</a></li>
+
+                        <?php else: ?>
+                        <li><a href="<?php echo e(route('seller.login')); ?>">login</a></li>
+
+                        <?php endif; ?> 
 
                         <?php endif; ?>
 					</ul>

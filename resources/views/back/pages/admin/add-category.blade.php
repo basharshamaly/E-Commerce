@@ -7,7 +7,7 @@
 @endsection
 
 @push('content')
-   
+
 
  <div class="row">
     <div class="col-md-12">
@@ -27,13 +27,13 @@
                 <strong>Success:</strong> {!! Session::get('success') !!}
             </div>
         @endif
-        
+
         @if(Session::has('fail'))
             <div class="alert alert-danger">
                 <strong>Error:</strong> {!! Session::get('fail') !!}
             </div>
         @endif
-        
+
         <div class="row">
             <div class="col-md-7">
                 <div class="form-group">
@@ -58,11 +58,11 @@
                     <label class="d-block font-weight-bold mb-2">Current Image</label>
                     @if($categories && $categories->category_image)
 
-                    <img 
-                        src="/images/categories/{{ $categories->category_image  }}" 
-                        alt="Category Image Preview" 
-                        id="category_image_preview" 
-                        class="img-thumbnail" 
+                    <img
+                        src="/images/categories/{{ $categories->category_image  }}"
+                        alt="Category Image Preview"
+                        id="category_image_preview"
+                        class="img-thumbnail"
                         style="width: 100px; height: 100px; object-fit: cover;"
                         data-ijabo-default-img="/images/categories/{{ $categories->category_image  }}"
                     >
@@ -85,7 +85,7 @@
    <script>
     $('input[type="file"][name="category_image"]').ijaboViewer({
         preview:'#category_image_preview',
-        allowedExtensions:['jpg','png','jpeg','svg'],
+        allowedExtensions:['png',,'jpg','jpeg','svg'],
         imageShape:'square',
         onErrorShape:function(message,element){
             alert(message);

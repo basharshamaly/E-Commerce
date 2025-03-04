@@ -10,7 +10,7 @@
                 <span class="user-icon">
                     <img src="{{Auth::guard('admin')->user()->picture}}" alt="" />
                 </span>
-                <span class="user-name">{{ Auth::user()->name }}</span>
+                <span class="user-name">{{ Auth::user()->name ?? "" }}</span>
             </a>
             <div
                 class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"

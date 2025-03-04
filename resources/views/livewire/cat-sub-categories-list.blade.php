@@ -60,6 +60,7 @@
                         </tbody>
 
                      </table>
+                     {{ $categories->links('livewire::simple-bootstrap') }}
                 </div>
             </div>
         </div>
@@ -86,6 +87,7 @@
                                     Sub Category Name
                                 </th>
                                 <th>Category Name</th>
+                                <th>SubCategory Image</th>
                                 <th>Child SubCategory Name</th>
                                 <th>actions</th>
                             </tr>
@@ -96,8 +98,15 @@
                                 <td>
                                     {{$subcategory->subcategory_name}}
                                 </td>
+
                                 <td>
                                     {{ $subcategory->category->category_name }}
+                                </td>
+
+                                <td>
+                                    <div class="avatar mr-2">
+                                        <img src="/images/subcategories/{{$subcategory->subcategory_image}}" width="50" height="50"  alt="">
+                                    </div>
                                 </td>
                                 <td>
                                     @if ($subcategory->childSubCategory->count() > 0)
@@ -110,7 +119,7 @@
                                                             Edit
                                                         </a>
                                                         |
-                                                        <a href="#" class="text-danger" data-toggle="tooltip" title="Delete child subcategory name">
+                                                        <a href="javaScript:;" class="text-danger deleteSubCategory" data-id="{{$item->id}}" data-title="delte child sub category" data-toggle="tooltip" title="Delete child subcategory name">
                                                             Delete
                                                         </a>
                                                     </div>
@@ -128,9 +137,10 @@
                                             <i class="dw dw-edit-2"></i>
                                         </a>
 
-                                        <a href="" class="text-danger">
+                                        <a href="javaScript:;" class="text-danger deleteSubCategory" data-id="{{$subcategory->id}}" data-title="delete subcategory">
                                             <i class="dw dw-delete-2"></i>
                                         </a>
+
                                     </div>
                                 </td>
                             </tr>
@@ -144,6 +154,7 @@
                         </tbody>
 
                      </table>
+                     {{ $subcategories->links('livewire::simple-bootstrap') }}
                 </div>
             </div>
         </div>

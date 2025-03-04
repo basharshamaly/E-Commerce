@@ -239,15 +239,15 @@ rel="stylesheet"
              <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('admin-seller-header-profile-info')->html();
-} elseif ($_instance->childHasBeenRendered('LgjMKUJ')) {
-    $componentId = $_instance->getRenderedChildComponentId('LgjMKUJ');
-    $componentTag = $_instance->getRenderedChildComponentTagName('LgjMKUJ');
+} elseif ($_instance->childHasBeenRendered('EgmrpPN')) {
+    $componentId = $_instance->getRenderedChildComponentId('EgmrpPN');
+    $componentTag = $_instance->getRenderedChildComponentTagName('EgmrpPN');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('LgjMKUJ');
+    $_instance->preserveRenderedChild('EgmrpPN');
 } else {
     $response = \Livewire\Livewire::mount('admin-seller-header-profile-info');
     $html = $response->html();
-    $_instance->logRenderedChild('LgjMKUJ', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('EgmrpPN', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -492,6 +492,29 @@ echo $html;
 							</a>
 						</li>
                         <?php endif; ?>
+
+
+
+                        <?php if(Route::is('seller.*')): ?>
+
+                        <li class="dropdown">
+							<a href="<?php echo e(route('seller.home')); ?>" class="dropdown-toggle <?php echo e(Route::is('seller.home')?'active': ''); ?>">
+								<span class="micon bi bi-house"></span
+								><span class="mtext">Home</span>
+							</a>
+						</li>
+
+						
+						
+
+
+
+                        
+                        <?php endif; ?>
+
+
+
+
 
 					</ul>
 				</div>

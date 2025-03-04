@@ -20,7 +20,7 @@
                     <a href="{{ route('admin.category.cat-sub-cat-list') }}" class="btn btn-primary btn-sm " > <i class="ion-arrow-left-a"></i> Back to categories List </a>
                 </div>
             </div>
-            <form action="{{ route('admin.category.store-subcategory') }}" method="post" class="mt-3">
+            <form action="{{ route('admin.category.store-subcategory') }}" enctype="multipart/form-data" method="POST" class="mt-3">
             @csrf
             @if(Session::has('success'))
             <div class="alert alert-success">
@@ -64,6 +64,48 @@
                     @enderror
                 </div>
             </div>
+
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label for="">Sub_Category Image</label>
+                    <input type="file" name="subcategory_image" id="subcategory_image" placeholder="enter subcategory_image" class="form-control" value="{{ old('subcategory_image') }}">
+                    @error('subcategory_image')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div class="avatar mb-3 ">
+                    <label class="d-block font-weight-bold mb-2">Current Image</label>
+                    @if($subcategories_1 && $subcategories_1->subcategory_image)
+
+                    <img
+                        src="/images/subcategories/{{ $subcategories_1->subcategory_image  }}"
+                        alt="Sub Category Image Preview"
+                        id="subcategory_image_preview"
+                        class="img-thumbnail"
+                        style="width: 100px; height: 100px; object-fit: cover;"
+                        data-ijabo-default-img="/images/categories/{{ $subcategories_1->subcategory_image  }}"
+                    >
+                    @else
+                        <p>No subcategory image available</p>
+                        @endif
+                </div>
+            </div>
+
+
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label for="">price</label>
+                    <input type="text" name="price" id="price" placeholder="enter price" class="form-control" value="{{ old('price') }}">
+                    @error('price')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+
+
             <div class="col-md-7">
                 <div class="form-group">
                     <label for="">Is Child Of</label>
@@ -91,4 +133,16 @@
 
 @push('scripts')
 
+<script>
+    $('input[type="file"][name="subcategory_image"]').ijaboViewer({
+        preview:'#subcategory_image_preview',
+        allowedExtensions:['jpg','png','jpeg','svg'],
+        imageShape:'square',
+        onErrorShape:function(message,element){
+            alert(message);
+        },OnInvalidType:function(message,element){
+            alert(message);
+        },OnSuccess:function(message,element){},
+    })
+   </script>
 @endpush

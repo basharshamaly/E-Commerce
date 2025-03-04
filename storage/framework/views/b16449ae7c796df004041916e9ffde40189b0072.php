@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title','page create category'); ?>
 
 <?php $__env->startSection('styles'); ?>
@@ -7,7 +5,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('content'); ?>
-   
+
 
  <div class="row">
     <div class="col-md-12">
@@ -28,14 +26,14 @@
 
             </div>
         <?php endif; ?>
-        
+
         <?php if(Session::has('fail')): ?>
             <div class="alert alert-danger">
                 <strong>Error:</strong> <?php echo Session::get('fail'); ?>
 
             </div>
         <?php endif; ?>
-        
+
         <div class="row">
             <div class="col-md-7">
                 <div class="form-group">
@@ -74,11 +72,11 @@ unset($__errorArgs, $__bag); ?>
                     <label class="d-block font-weight-bold mb-2">Current Image</label>
                     <?php if($categories && $categories->category_image): ?>
 
-                    <img 
-                        src="/images/categories/<?php echo e($categories->category_image); ?>" 
-                        alt="Category Image Preview" 
-                        id="category_image_preview" 
-                        class="img-thumbnail" 
+                    <img
+                        src="/images/categories/<?php echo e($categories->category_image); ?>"
+                        alt="Category Image Preview"
+                        id="category_image_preview"
+                        class="img-thumbnail"
                         style="width: 100px; height: 100px; object-fit: cover;"
                         data-ijabo-default-img="/images/categories/<?php echo e($categories->category_image); ?>"
                     >
@@ -101,7 +99,7 @@ unset($__errorArgs, $__bag); ?>
    <script>
     $('input[type="file"][name="category_image"]').ijaboViewer({
         preview:'#category_image_preview',
-        allowedExtensions:['jpg','png','jpeg','svg'],
+        allowedExtensions:['png',,'jpg','jpeg','svg'],
         imageShape:'square',
         onErrorShape:function(message,element){
             alert(message);

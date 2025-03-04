@@ -10,7 +10,7 @@
                 <span class="user-icon">
                     <img src="<?php echo e(Auth::guard('admin')->user()->picture); ?>" alt="" />
                 </span>
-                <span class="user-name"><?php echo e(Auth::user()->name); ?></span>
+                <span class="user-name"><?php echo e(Auth::user()->name ?? ""); ?></span>
             </a>
             <div
                 class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"

@@ -42,5 +42,7 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('socialnetworks', $socialnetworks);
         });
+
+        require_once app_path('helper/helper.php');
     }
 }

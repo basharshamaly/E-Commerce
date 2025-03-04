@@ -111,6 +111,29 @@
             }
         });
     });
+
+    $(document).on('click','.deleteSubCategory',function(event){
+        event.preventDefault();
+        var subcategory_id=$(this).data('id');
+        var title=$(this).data('title');
+        swal.fire({
+               title:"are you sure to delete this <b>"+title+'</b>',
+               showCancelButton:true,
+               showCloseButton:true,
+               cancelButtonText:'Cancel',
+               confirmButtonText:'yes delete this',
+               cancelButtonColor:'#d33',
+               confirmButtonColor:'#3085d6',
+               width:300,
+               allowOutsideClick:false,
+
+        }).then(function(result){
+            if(result.isConfirmed){
+                window.livewire.emit('deleteSubCategory', subcategory_id);
+            }
+        });
+
+    })
 </script>
 
 

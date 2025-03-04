@@ -263,42 +263,40 @@
                               <a class="nav-link dropdown-toggle" href="#" id="dropdownCategory" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
                               <ul class="dropdown-menu" aria-labelledby="dropdownCategory">
                                   <!-- Category 1 -->
+                                  @if(count(get_categories())>0)
+                                  @foreach (get_categories() as $categories  )
+
+
                                   <li class="dropdown">
                                       <a class="dropdown-item dropdown-toggle" href="#" id="dropdownCategory1" data-bs-toggle="dropdown" aria-expanded="false">
-                                          Category 1
+                                         {{$categories->category_name}}
                                       </a>
                                       <ul class="dropdown-menu" aria-labelledby="dropdownCategory1">
+                                         @if(count($categories->subcategories)>0)
+                                         @foreach ( $categories->subcategories as $subcategory )
+
+                                         @if($subcategory->Is_Child_Category == 0)
+
                                           <li class="dropdown">
                                               <a class="dropdown-item dropdown-toggle" href="#" id="subcategory1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                  Subcategory 1
+                                                  {{ $subcategory->subcategory_name }}
                                               </a>
                                               <ul class="dropdown-menu" aria-labelledby="subcategory1">
-                                                  <li><a href="#" class="dropdown-item">Child Subcategory 1</a></li>
-                                                  <li><a href="#" class="dropdown-item">Child Subcategory 2</a></li>
+                                                @if(count($subcategory->childSubCategory)>0)
+                                                     @foreach($subcategory->childSubCategory as  $child)
+                                                  <li><a href="#" class="dropdown-item">{{ $child->subcategory_name }}</a></li>
+                                                  @endforeach
+                                                 @endif
                                               </ul>
                                           </li>
-                                          <li><a href="#" class="dropdown-item">Subcategory 2</a></li>
+                                          @endif
+                                          @endforeach
+                                          @endif
                                       </ul>
                                   </li>
 
-                                  <!-- Category 2 -->
-                                  <li class="dropdown">
-                                      <a class="dropdown-item dropdown-toggle" href="#" id="dropdownCategory2" data-bs-toggle="dropdown" aria-expanded="false">
-                                          Category 2
-                                      </a>
-                                      <ul class="dropdown-menu" aria-labelledby="dropdownCategory2">
-                                          <li class="dropdown">
-                                              <a class="dropdown-item dropdown-toggle" href="#" id="subcategory3" data-bs-toggle="dropdown" aria-expanded="false">
-                                                  Subcategory 3
-                                              </a>
-                                              <ul class="dropdown-menu" aria-labelledby="subcategory3">
-                                                  <li><a href="#" class="dropdown-item">Child Subcategory 3</a></li>
-                                                  <li><a href="#" class="dropdown-item">Child Subcategory 4</a></li>
-                                              </ul>
-                                          </li>
-                                          <li><a href="#" class="dropdown-item">Subcategory 4</a></li>
-                                      </ul>
-                                  </li>
+                                  @endforeach
+                                  @endif
                               </ul>
                             </li>
 
