@@ -30,6 +30,7 @@ class Seller extends Authenticatable
         'picture',
         'payment_method',
         'payment_email',
+        'verified',
         'status',
 
     ];

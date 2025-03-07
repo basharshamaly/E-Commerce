@@ -24,16 +24,7 @@
             <form action="" method="POST">
                 @csrf
 
-        @if (session('fail'))
-        <div class="alert alert-danger">
-            {{ session('fail') }}
-        </div>
-    @endif
-    @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+                   <x-alert-form\>
                 <div class="select-role">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn active">
