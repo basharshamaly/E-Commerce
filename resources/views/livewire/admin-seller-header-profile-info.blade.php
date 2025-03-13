@@ -8,7 +8,7 @@
                 data-toggle="dropdown"
             >
                 <span class="user-icon">
-                    <img src="{{Auth::guard('admin')->user()->picture}}" alt="" />
+                    <img src="{{Auth::guard('admin')->user()->picture ?? ""}}" alt="" />
                 </span>
                 <span class="user-name">{{ Auth::user()->name ?? "" }}</span>
             </a>
@@ -24,6 +24,7 @@
                 <a class="dropdown-item" href="faq.html"
                     ><i class="dw dw-help"></i> Help</a
                 >
+                @if(Auth::guard('admin'))
                 <form action="{{ route('admin.logout_Handler') }}" method="POST">
                     @csrf
                     @if(session('success'))
@@ -37,6 +38,16 @@
                 <button class="dropdown-item" type="submit"
                     ><i class="dw dw-logout"></i> Log Out</button>
                 </form>
+                @endif
+
+                @if(Auth::guard('seller'))
+                <a class="dropdown-item" href="{{ route('seller.logout') }}" onclick="event.preventDefault();document.getElementById('sellerLogoutForm').submit();"
+                ><i class="dw dw-help"></i> logout</a
+            >
+        <form action="{{route('seller.logout')}}" method="POST" id="sellerLogoutForm">
+            @csrf
+        </form>
+        @endif
 
             </div>
         </div>

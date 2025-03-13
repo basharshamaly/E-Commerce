@@ -239,22 +239,39 @@ rel="stylesheet"
              <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('admin-seller-header-profile-info')->html();
-} elseif ($_instance->childHasBeenRendered('EgmrpPN')) {
-    $componentId = $_instance->getRenderedChildComponentId('EgmrpPN');
-    $componentTag = $_instance->getRenderedChildComponentTagName('EgmrpPN');
+} elseif ($_instance->childHasBeenRendered('ZSOeyvY')) {
+    $componentId = $_instance->getRenderedChildComponentId('ZSOeyvY');
+    $componentTag = $_instance->getRenderedChildComponentTagName('ZSOeyvY');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('EgmrpPN');
+    $_instance->preserveRenderedChild('ZSOeyvY');
 } else {
     $response = \Livewire\Livewire::mount('admin-seller-header-profile-info');
     $html = $response->html();
-    $_instance->logRenderedChild('EgmrpPN', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('ZSOeyvY', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
 
+
             <?php elseif(Auth::guard('seller')->check()): ?>
               
-              <livewire(livewire:admin-seller-header-profile-info)>
+              
+                <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('admin-seller-header-profile-info')->html();
+} elseif ($_instance->childHasBeenRendered('krqPBkd')) {
+    $componentId = $_instance->getRenderedChildComponentId('krqPBkd');
+    $componentTag = $_instance->getRenderedChildComponentTagName('krqPBkd');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('krqPBkd');
+} else {
+    $response = \Livewire\Livewire::mount('admin-seller-header-profile-info');
+    $html = $response->html();
+    $_instance->logRenderedChild('krqPBkd', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
+
 
              
              
@@ -452,11 +469,6 @@ echo $html;
 								<span class="micon bi bi-house"></span
 								><span class="mtext">Home</span>
 							</a>
-							<ul class="submenu">
-								<li><a href="index.html">Dashboard style 1</a></li>
-								<li><a href="index2.html">Dashboard style 2</a></li>
-								<li><a href="index3.html">Dashboard style 3</a></li>
-							</ul>
 						</li>
 
 						<li>
@@ -498,12 +510,39 @@ echo $html;
                         <?php if(Route::is('seller.*')): ?>
 
                         <li class="dropdown">
-							<a href="<?php echo e(route('seller.home')); ?>" class="dropdown-toggle <?php echo e(Route::is('seller.home')?'active': ''); ?>">
+							<a href="<?php echo e(route('admin.home')); ?>" class="dropdown-toggle <?php echo e(Route::is('admin.home')?'active': ''); ?>">
 								<span class="micon bi bi-house"></span
 								><span class="mtext">Home</span>
 							</a>
 						</li>
 
+						<li>
+							<a href="invoice.html" class="dropdown-toggle no-arrow ">
+								<span class="micon bi bi-receipt-cutoff"></span
+								><span class="mtext">Invoice</span>
+							</a>
+						</li>
+
+                        <li>
+							<div class="sidebar-small-cap">Settings</div>
+						</li>
+
+
+                        <li>
+							<a href="" class="dropdown-toggle no-arrow">
+								<span class="micon"><i class="fas fa-user"></i>
+                                    </span
+								><span class="mtext">Profile</span>
+							</a>
+						</li>
+
+                        <li>
+							<a href="" class="dropdown-toggle no-arrow ">
+								<span class="micon"><i class="fas fa-cogs"></i>
+                                    </span
+								><span class="mtext">Settings</span>
+							</a>
+						</li>
 						
 						
 

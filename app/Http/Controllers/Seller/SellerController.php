@@ -7,11 +7,12 @@ use App\Mail\VerifiedAccountSellerMail;
 use App\Models\Seller;
 use App\Models\VerificationToken;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-
-
+use Intervention\Image\Colors\Rgb\Channels\Red;
 
 class SellerController extends Controller
 {
@@ -123,6 +124,8 @@ class SellerController extends Controller
             //if column verified is  empty or value equal to 0
             if (!$sellers->verified) {
                 $sellers->verified = 1;
+                $sellers->email_verified_at = Carbon::now();
+
                 $sellers->save();
                 return redirect()->route('seller.login')->with('success', 'your account become is verified ');
             } else {
@@ -132,5 +135,47 @@ class SellerController extends Controller
         } else {
             return redirect()->route('seller.register')->with('fail', 'Invalid Token');
         }
+    }
+
+    public function loginHandler(Request $request)
+    {
+        //to know what user enter value username or email
+        $fieldType = filter_var($request->login_id, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        if ($fieldType == 'email') {
+            $request->validate([
+                'login_id' => 'required|email|exists:sellers,email',
+                'password' => 'required|min:5|max:45',
+            ], []);
+        } else {
+            $request->validate([
+                'login_id' => 'required|exists:sellers,username',
+                'password' => 'required|min:5|max:45',
+            ], []);
+        }
+
+        $cred = [
+            //type $fieldType=>$request->login_id because multi value possiple (email or username)
+            $fieldType => $request->login_id,
+            'password' => $request->password,
+        ];
+        if (Auth::guard('seller')->attempt($cred)) {
+            // return redirect()->route('seller.home');
+            if (!auth('seller')->user()->verified) {
+                auth('seller')->logout();
+                return redirect()->route('seller.login')->with('fail', 'your account not verified please check your email');
+            } else {
+                return redirect()->route('seller.home');
+            }
+        } else {
+            return redirect()->route('seller.login')->withInput()->with('fail', 'login faield');
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('seller')->logout();
+
+        return redirect()->route('seller.login')->withInput()->with('fail', 'you logout now');
     }
 }

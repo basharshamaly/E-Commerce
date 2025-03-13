@@ -1,6 +1,6 @@
 @extends('back.pages.page-layout')
 
-@section('title','home seller page')
+@section('title','home page ')
 
 @section('styles')
 
@@ -8,13 +8,13 @@
 
 @push('content')
    
-
-
-<h1>e commerce</h1>
- 
-
+   <h1>welcome to e-commece</h1>
 @endpush
 
 @push('scripts')
    
 @endpush
+
+
+
+

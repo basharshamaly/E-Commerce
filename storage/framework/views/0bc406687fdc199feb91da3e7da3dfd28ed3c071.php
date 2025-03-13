@@ -21,7 +21,7 @@
                 <h2 class="text-center text-primary">Login To Dashboard</h2>
             </div>
 
-            <form action="" method="POST">
+            <form action="<?php echo e(route('seller.login-handler')); ?>" method="POST">
                 <?php echo csrf_field(); ?>
 
                    <x-alert-form\>

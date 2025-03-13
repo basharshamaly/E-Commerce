@@ -248,9 +248,12 @@ rel="stylesheet"
              {{-- way two to include livewire to bage --}}
              @livewire('admin-seller-header-profile-info')
 
+
             @elseif(Auth::guard('seller')->check())
               {{-- way one to include livewire to bage --}}
-              <livewire(livewire:admin-seller-header-profile-info)>
+              {{-- <livewire(livewire:admin-seller-header-profile-info)> --}}
+                @livewire('admin-seller-header-profile-info')
+
 
              {{-- way two to include livewire to bage --}}
              {{-- @livewire('admin-seller-header-profile-info') --}}
@@ -448,11 +451,6 @@ rel="stylesheet"
 								<span class="micon bi bi-house"></span
 								><span class="mtext">Home</span>
 							</a>
-							<ul class="submenu">
-								<li><a href="index.html">Dashboard style 1</a></li>
-								<li><a href="index2.html">Dashboard style 2</a></li>
-								<li><a href="index3.html">Dashboard style 3</a></li>
-							</ul>
 						</li>
 
 						<li>
@@ -494,12 +492,39 @@ rel="stylesheet"
                         @if(Route::is('seller.*'))
 
                         <li class="dropdown">
-							<a href="{{ route('seller.home') }}" class="dropdown-toggle {{ Route::is('seller.home')?'active': '' }}">
+							<a href="{{ route('admin.home') }}" class="dropdown-toggle {{ Route::is('admin.home')?'active': '' }}">
 								<span class="micon bi bi-house"></span
 								><span class="mtext">Home</span>
 							</a>
 						</li>
 
+						<li>
+							<a href="invoice.html" class="dropdown-toggle no-arrow ">
+								<span class="micon bi bi-receipt-cutoff"></span
+								><span class="mtext">Invoice</span>
+							</a>
+						</li>
+
+                        <li>
+							<div class="sidebar-small-cap">Settings</div>
+						</li>
+
+
+                        <li>
+							<a href="" class="dropdown-toggle no-arrow">
+								<span class="micon"><i class="fas fa-user"></i>
+                                    </span
+								><span class="mtext">Profile</span>
+							</a>
+						</li>
+
+                        <li>
+							<a href="" class="dropdown-toggle no-arrow ">
+								<span class="micon"><i class="fas fa-cogs"></i>
+                                    </span
+								><span class="mtext">Settings</span>
+							</a>
+						</li>
 						{{-- <li>
 							<a href="invoice.html" class="dropdown-toggle no-arrow ">
 								<span class="micon bi bi-receipt-cutoff"></span

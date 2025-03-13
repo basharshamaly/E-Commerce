@@ -80,7 +80,7 @@
                             <span class="text-denger">{{ $message }}</span>
                         @enderror
                     </div>
-                   
+
                     <button type="submit" class="btn btn-primary">Save Change </button>
                 </form>
                 </div>
@@ -100,7 +100,7 @@
                                     data-ijab-default-img="/images/site/{{ $site_logo }}"
                                     id="site_logo_image"
                                     alt="Site Logo"
-                                  
+
 
                                 >
 
