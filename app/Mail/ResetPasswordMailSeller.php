@@ -6,12 +6,12 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ResetPasswordMail extends Mailable
+class ResetPasswordMailSeller extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $actionLink;
-    public $admin;
+    public $sellers;
 
 
     /**
@@ -19,10 +19,10 @@ class ResetPasswordMail extends Mailable
      *
      * @return void
      */
-    public function __construct($actionLink, $admin)
+    public function __construct($actionLink, $sellers)
     {
         $this->actionLink = $actionLink;
-        $this->admin = $admin;
+        $this->sellers = $sellers;
     }
 
 
@@ -36,10 +36,10 @@ class ResetPasswordMail extends Mailable
     {
         return $this->from(env('MAIL_FROM_EMAIL'), env('MAIL_FROM_NAME'))
             ->subject('Reset Password')
-            ->view('email-templates.admin-forgot-email-template')
+            ->view('email-templates.seller-forgot-email-temblate')
             ->with([
                 'actionLink' => $this->actionLink,
-                'admin' => $this->admin,
+                'seller' => $this->sellers,
 
             ]);
     }

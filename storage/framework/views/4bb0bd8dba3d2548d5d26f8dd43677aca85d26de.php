@@ -239,15 +239,15 @@ rel="stylesheet"
              <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('admin-seller-header-profile-info')->html();
-} elseif ($_instance->childHasBeenRendered('ZSOeyvY')) {
-    $componentId = $_instance->getRenderedChildComponentId('ZSOeyvY');
-    $componentTag = $_instance->getRenderedChildComponentTagName('ZSOeyvY');
+} elseif ($_instance->childHasBeenRendered('nowsbfj')) {
+    $componentId = $_instance->getRenderedChildComponentId('nowsbfj');
+    $componentTag = $_instance->getRenderedChildComponentTagName('nowsbfj');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('ZSOeyvY');
+    $_instance->preserveRenderedChild('nowsbfj');
 } else {
     $response = \Livewire\Livewire::mount('admin-seller-header-profile-info');
     $html = $response->html();
-    $_instance->logRenderedChild('ZSOeyvY', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('nowsbfj', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -259,15 +259,15 @@ echo $html;
                 <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('admin-seller-header-profile-info')->html();
-} elseif ($_instance->childHasBeenRendered('krqPBkd')) {
-    $componentId = $_instance->getRenderedChildComponentId('krqPBkd');
-    $componentTag = $_instance->getRenderedChildComponentTagName('krqPBkd');
+} elseif ($_instance->childHasBeenRendered('I7n8pdC')) {
+    $componentId = $_instance->getRenderedChildComponentId('I7n8pdC');
+    $componentTag = $_instance->getRenderedChildComponentTagName('I7n8pdC');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('krqPBkd');
+    $_instance->preserveRenderedChild('I7n8pdC');
 } else {
     $response = \Livewire\Livewire::mount('admin-seller-header-profile-info');
     $html = $response->html();
-    $_instance->logRenderedChild('krqPBkd', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('I7n8pdC', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -526,6 +526,7 @@ echo $html;
                         <li>
 							<div class="sidebar-small-cap">Settings</div>
 						</li>
+
 
 
                         <li>

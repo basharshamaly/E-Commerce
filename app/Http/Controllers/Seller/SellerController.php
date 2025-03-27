@@ -3,16 +3,19 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Mail\FormResetPasswordMailSeller;
+use App\Mail\ResetPasswordMailSeller;
 use App\Mail\VerifiedAccountSellerMail;
 use App\Models\Seller;
 use App\Models\VerificationToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Intervention\Image\Colors\Rgb\Channels\Red;
+
 
 class SellerController extends Controller
 {
@@ -177,5 +180,177 @@ class SellerController extends Controller
         Auth::guard('seller')->logout();
 
         return redirect()->route('seller.login')->withInput()->with('fail', 'you logout now');
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        return view('back.pages.seller.auth.forgot-password');
+    }
+
+
+    public function resetPasswordLink(Request $request)
+    {
+        // التحقق من صحة الإدخال
+        $request->validate([
+            'email' => 'required|email|exists:sellers,email'
+        ]);
+
+        // جلب بيانات البائع باستخدام البريد الإلكتروني
+        $sellers = Seller::where('email', $request->email)->first();
+        if (!$sellers) {
+            session()->flash('fail', 'This email does not exist in our records.');
+            return redirect()->route('seller.forgot-password');
+        }
+
+        // إنشاء رمز إعادة تعيين كلمة المرور
+        $token = base64_encode(Str::random(64));
+
+        // التحقق مما إذا كان هناك رمز قديم موجود
+        $oldToken = DB::table('password_resets')->where('email', $request->email)->where('guard', 'seller')->first();
+
+        if ($oldToken) {
+            // تحديث التوكن إذا كان موجودًا
+            DB::table('password_resets')->where('email', $request->email)->where('guard', 'seller')->update([
+                'token' => $token,
+                'created_at' => Carbon::now(),
+            ]);
+        } else {
+            // إدخال بيانات جديدة إذا لم يكن هناك رمز قديم
+            DB::table('password_resets')->insert([
+                'email' => $request->email,
+                'token' => $token,
+                'guard' => 'seller',
+                'created_at' => Carbon::now(),
+            ]);
+        }
+
+        // إنشاء رابط إعادة التعيين
+        $actionLink = route('seller.form-reset-password', ['token' => $token, 'email' => urlencode($sellers->email)]);
+
+        // إعداد بيانات البريد الإلكتروني
+        $data = [
+            'actionLink' => $actionLink,
+            'seller' => $sellers,
+        ];
+
+        // إنشاء قالب البريد الإلكتروني
+        $mailbody = view('email-templates.seller-forgot-email-temblate', $data)->render();
+
+        // إعداد بيانات الإرسال
+        $mailconfig = [
+            'mail_from_email' => env('MAIL_FROM_EMAIL'),
+            'mail_from_name' => env('MAIL_FROM_NAME'),
+            'mail_recipient_name' => $sellers->name,
+            'mail_recipient_email' => $request->email,
+            'mail_subject' => 'Reset Password',
+            'mail_body' => $mailbody,
+        ];
+
+        // إرسال البريد الإلكتروني مع التعامل مع الأخطاء
+        try {
+            Mail::to($sellers->email)->send(new ResetPasswordMailSeller($actionLink, $sellers));
+            session()->flash('success', 'We have sent you a reset password email.');
+        } catch (\Exception $e) {
+            session()->flash('fail', 'Something went wrong while sending the email, please try again.');
+        }
+
+        return redirect()->route('seller.forgot-password')->with('success', 'please check your email you resived link to reset password');
+    }
+
+    public function formResetPassword(Request $request, $token)
+    {
+
+        //get details token
+        $get_token = DB::table('password_resets')->where('token', $token)->where('guard', 'seller')->first();
+
+        if ($get_token) {
+            //check if token not expired
+            $diffMinus = Carbon::createFromFormat('Y-m-d H:i:s', $get_token->created_at)->diffInMinutes(Carbon::now());
+
+            if ($diffMinus > 15) {
+                //when token is older from 15 minutes
+                return redirect()->route('seller.forgot-password', ['token' => $token])->with('fail', 'token invalid because this token is valid to first 15 minutes');
+            } else {
+                return view('back.pages.seller.auth.reset')->with(['token' => $token]);
+            }
+        }
+    }
+
+
+
+    public function resetPasswordHandler(Request $request)
+    { {
+            // ✅ التحقق من صحة الإدخال
+            $request->validate([
+                'new_password' => 'required|min:5|max:45|required_with:confirm_new_password|same:confirm_new_password',
+                'confirm_new_password' => 'required',
+                // 'token' => 'required' // تأكد من أن التوكن يتم تمريره
+            ]);
+
+
+            // ✅ التحقق من وجود التوكن في قاعدة البيانات
+            $get_token = DB::table('password_resets')->where('token', $request->token)->first();
+
+            if (!$get_token) {
+                return back()->with('fail', 'Invalid or expired password reset token.');
+            }
+
+            // ✅ التحقق من وجود البائع بناءً على البريد الإلكتروني المخزن في التوكن
+            $sellers = Seller::where('email', $get_token->email)->first();
+
+            if (!$sellers) {
+                return back()->with('fail', 'Seller account not found.');
+            }
+
+
+
+            // ✅ تحديث كلمة المرور
+            $passwordHashed = Hash::make($request->new_password);
+            $updateStatus = Seller::where('email', $get_token->email)->update([
+                'password' => $passwordHashed,
+            ]);
+
+            // 🛠 التحقق مما إذا تم تحديث كلمة المرور
+            if ($updateStatus === 0) {
+                return back()->with('fail', 'Password update failed. Try again.');
+            }
+
+            // ✅ حذف التوكن بعد نجاح تغيير كلمة المرور
+            DB::table('password_resets')->where([
+                'token' => $request->token,
+                'email' => $sellers->email,
+            ])->delete();
+
+            $data = [
+                'seller' => $sellers,
+                'new_password' => $request->new_password,
+            ];
+
+            // إنشاء قالب البريد الإلكتروني
+            $mailbody = view('email-templates.seller-email-reset-template', $data)->render();
+
+            // إعداد بيانات الإرسال
+            $mailconfig = [
+                'mail_from_email' => env('MAIL_FROM_EMAIL'),
+                'mail_from_name' => env('MAIL_FROM_NAME'),
+                'mail_recipient_name' => $sellers->name,
+                'mail_recipient_email' => $sellers->email,
+                'mail_subject' => 'Reset Password',
+                'mail_body' => $mailbody,
+            ];
+
+            try {
+                Mail::to($sellers->email)->send(new FormResetPasswordMailSeller($sellers, $request->new_password));
+                session()->flash('success', 'Password has been changed successfully.');
+            } catch (\Exception $e) {
+                \Log::error('Email failed: ' . $e->getMessage());
+                return redirect()->route('seller.login')->with('fail', 'Password updated, but failed to send email notification.');
+            }
+
+            return redirect()->route('seller.login')->with('success', 'Password has been changed successfully.');
+
+
+            // إعادة التوجيه مع رسالة نجاح إذا لم تحدث أي استثناءات
+        }
     }
 }
