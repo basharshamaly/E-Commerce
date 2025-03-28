@@ -239,15 +239,15 @@ rel="stylesheet"
              <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('admin-seller-header-profile-info')->html();
-} elseif ($_instance->childHasBeenRendered('nowsbfj')) {
-    $componentId = $_instance->getRenderedChildComponentId('nowsbfj');
-    $componentTag = $_instance->getRenderedChildComponentTagName('nowsbfj');
+} elseif ($_instance->childHasBeenRendered('PhKaupr')) {
+    $componentId = $_instance->getRenderedChildComponentId('PhKaupr');
+    $componentTag = $_instance->getRenderedChildComponentTagName('PhKaupr');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('nowsbfj');
+    $_instance->preserveRenderedChild('PhKaupr');
 } else {
     $response = \Livewire\Livewire::mount('admin-seller-header-profile-info');
     $html = $response->html();
-    $_instance->logRenderedChild('nowsbfj', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('PhKaupr', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -259,15 +259,15 @@ echo $html;
                 <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('admin-seller-header-profile-info')->html();
-} elseif ($_instance->childHasBeenRendered('I7n8pdC')) {
-    $componentId = $_instance->getRenderedChildComponentId('I7n8pdC');
-    $componentTag = $_instance->getRenderedChildComponentTagName('I7n8pdC');
+} elseif ($_instance->childHasBeenRendered('dT4xz2A')) {
+    $componentId = $_instance->getRenderedChildComponentId('dT4xz2A');
+    $componentTag = $_instance->getRenderedChildComponentTagName('dT4xz2A');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('I7n8pdC');
+    $_instance->preserveRenderedChild('dT4xz2A');
 } else {
     $response = \Livewire\Livewire::mount('admin-seller-header-profile-info');
     $html = $response->html();
-    $_instance->logRenderedChild('I7n8pdC', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('dT4xz2A', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -510,7 +510,7 @@ echo $html;
                         <?php if(Route::is('seller.*')): ?>
 
                         <li class="dropdown">
-							<a href="<?php echo e(route('admin.home')); ?>" class="dropdown-toggle <?php echo e(Route::is('admin.home')?'active': ''); ?>">
+							<a href="<?php echo e(route('seller.home')); ?>" class="dropdown-toggle <?php echo e(Route::is('seller.home')?'active': ''); ?>">
 								<span class="micon bi bi-house"></span
 								><span class="mtext">Home</span>
 							</a>
@@ -530,7 +530,7 @@ echo $html;
 
 
                         <li>
-							<a href="" class="dropdown-toggle no-arrow">
+							<a href="<?php echo e(route('seller.profile')); ?>" class="dropdown-toggle no-arrow">
 								<span class="micon"><i class="fas fa-user"></i>
                                     </span
 								><span class="mtext">Profile</span>

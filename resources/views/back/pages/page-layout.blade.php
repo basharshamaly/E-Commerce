@@ -492,7 +492,7 @@ rel="stylesheet"
                         @if(Route::is('seller.*'))
 
                         <li class="dropdown">
-							<a href="{{ route('admin.home') }}" class="dropdown-toggle {{ Route::is('admin.home')?'active': '' }}">
+							<a href="{{ route('seller.home') }}" class="dropdown-toggle {{ Route::is('seller.home')?'active': '' }}">
 								<span class="micon bi bi-house"></span
 								><span class="mtext">Home</span>
 							</a>
@@ -512,7 +512,7 @@ rel="stylesheet"
 
 
                         <li>
-							<a href="" class="dropdown-toggle no-arrow">
+							<a href="{{ route('seller.profile') }}" class="dropdown-toggle no-arrow">
 								<span class="micon"><i class="fas fa-user"></i>
                                     </span
 								><span class="mtext">Profile</span>

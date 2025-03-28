@@ -53,4 +53,15 @@ class Seller extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getPictureAttribute($value)
+    {
+
+        if ($value) {
+            return asset('/images/sellers/' . $value);
+        } else {
+
+            return asset('/images/default-avatar.png');
+        }
+    }
 }

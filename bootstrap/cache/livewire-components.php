@@ -3,4 +3,5 @@
   'admin-seller-header-profile-info' => 'App\\Http\\Livewire\\AdminSellerHeaderProfileInfo',
   'admin-settings' => 'App\\Http\\Livewire\\AdminSettings',
   'cat-sub-categories-list' => 'App\\Http\\Livewire\\CatSubCategoriesList',
+  'seller.seller-profile' => 'App\\Http\\Livewire\\Seller\\SellerProfile',
 );

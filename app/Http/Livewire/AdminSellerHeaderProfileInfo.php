@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Admin;
+use App\Models\Seller;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -16,6 +17,9 @@ class AdminSellerHeaderProfileInfo extends Component
     {
         if (Auth::guard('admin')->check()) {
             $this->admin = Admin::findOrFail(Auth::guard('admin')->id());
+        }
+        if (Auth::guard('seller')->check()) {
+            $this->seller = Seller::findOrFail(Auth::guard('seller')->id());
         }
     }
 

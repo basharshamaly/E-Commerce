@@ -178,6 +178,8 @@ class SellerController extends Controller
     public function logout(Request $request)
     {
         Auth::guard('seller')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return redirect()->route('seller.login')->withInput()->with('fail', 'you logout now');
     }
@@ -352,5 +354,10 @@ class SellerController extends Controller
 
             // إعادة التوجيه مع رسالة نجاح إذا لم تحدث أي استثناءات
         }
+    }
+
+    public function profileSeller()
+    {
+        return view('back.pages.seller.profile');
     }
 }

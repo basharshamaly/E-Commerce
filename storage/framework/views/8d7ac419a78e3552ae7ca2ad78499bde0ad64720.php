@@ -3,4 +3,4 @@
 <p><strong>Email:</strong> <?php echo e($seller->email); ?></p>
 <p><strong>Password:</strong> <?php echo e($new_password); ?></p>
 <p>Please change your password after logging in for security reasons.</p>
-<?php /**PATH D:\all think proparite laravel\E-Commerce\e-commerce\resources\views/email-templates/seller-email-reset-template.blade.php ENDPATH**/ ?>
+<p>dont sahre this information with others ...</p><?php /**PATH D:\all think proparite laravel\E-Commerce\e-commerce\resources\views/email-templates/seller-email-reset-template.blade.php ENDPATH**/ ?>
