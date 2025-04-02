@@ -3,6 +3,7 @@
 //get croategores frontend -->
 
 use App\Models\Category;
+use App\Models\Seller;
 use App\Models\SocialNetwork;
 use App\Models\SubCategory;
 
@@ -24,5 +25,11 @@ if (! function_exists('get_social_networks')) {
     function get_social_networks()
     {
         return SocialNetwork::all();
+    }
+}
+if (! function_exists('get_Profile_Seller')) {
+    function get_Profile_Seller()
+    {
+        return Seller::all();
     }
 }

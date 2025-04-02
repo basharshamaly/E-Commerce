@@ -30,18 +30,19 @@
             </div>
         </div>
     </div>
+    
     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('seller.seller-profile')->html();
-} elseif ($_instance->childHasBeenRendered('LSBzyce')) {
-    $componentId = $_instance->getRenderedChildComponentId('LSBzyce');
-    $componentTag = $_instance->getRenderedChildComponentTagName('LSBzyce');
+} elseif ($_instance->childHasBeenRendered('Q2Fl1KU')) {
+    $componentId = $_instance->getRenderedChildComponentId('Q2Fl1KU');
+    $componentTag = $_instance->getRenderedChildComponentTagName('Q2Fl1KU');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('LSBzyce');
+    $_instance->preserveRenderedChild('Q2Fl1KU');
 } else {
     $response = \Livewire\Livewire::mount('seller.seller-profile');
     $html = $response->html();
-    $_instance->logRenderedChild('LSBzyce', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('Q2Fl1KU', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -50,6 +51,36 @@ echo $html;
 
 <?php $__env->startPush('scripts'); ?>
    
+<script>
+   $('input[type="file"][id="sellerProfilePictureFile"]').kropify({
+    preview: 'sellerProfilePicture',
+    viewMode: 1,
+    aspectRatio: 1,
+    cancelButtonText: 'Cancel',
+    resetButtonText: 'Reset',
+    cropButtonText: 'Crop & update',
+    processURL: '<?php echo e(route("seller.seller-profile-picture")); ?>',
+    maxSize: 2097152, //2MB
+    showLoader: true,
+    animationClass: 'headShake',
+    fileName: 'sellerProfilePictureFile', // ✅ هنا صار نفس اسم الحقل اللي تتوقعه PHP
+    success: function (data) {
+        if (data.status == 1) {
+            livewire.emit('UpdateAdminSellerHeaderInfo');
+            livewire.emit('UpdateSellerProfilePicture');
+            toastr.success(data.msg);
+        } else {
+            toastr.error(data.msg);
+        }
+    },
+    errors: function (error, text) {
+        console.log(text);
+    }
+});
+
+</script>
+
+
 <?php $__env->stopPush(); ?>
 
 <?php echo $__env->make('back.pages.page-layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\all think proparite laravel\E-Commerce\e-commerce\resources\views/back/pages/seller/profile.blade.php ENDPATH**/ ?>

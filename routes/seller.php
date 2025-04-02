@@ -26,6 +26,7 @@ Route::prefix('/seller')->name('seller.')->group(function () {
             Route::get('/', 'home')->name('home');
             Route::post('/logout', 'logout')->name('logout');
             Route::get('/profile', 'profileSeller')->name('profile');
+            Route::post('/seller-profile-picture', 'updatedSellerProfilePicture')->name('seller-profile-picture');
         });
     });
 });

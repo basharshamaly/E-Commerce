@@ -30,10 +30,42 @@
             </div>
         </div>
     </div>
+    
     @livewire('seller.seller-profile')
 </div>
 @endpush
 
 @push('scripts')
    
+<script>
+   $('input[type="file"][id="sellerProfilePictureFile"]').kropify({
+    preview: 'sellerProfilePicture',
+    viewMode: 1,
+    aspectRatio: 1,
+    cancelButtonText: 'Cancel',
+    resetButtonText: 'Reset',
+    cropButtonText: 'Crop & update',
+    processURL: '{{ route("seller.seller-profile-picture") }}',
+    maxSize: 2097152, //2MB
+    showLoader: true,
+    animationClass: 'headShake',
+    fileName: 'sellerProfilePictureFile', // ✅ هنا صار نفس اسم الحقل اللي تتوقعه PHP
+    success: function (data) {
+        if (data.status == 1) {
+            livewire.emit('UpdateAdminSellerHeaderInfo');
+            livewire.emit('UpdateSellerProfilePicture');
+            toastr.success(data.msg);
+        } else {
+            toastr.error(data.msg);
+        }
+    },
+    errors: function (error, text) {
+        console.log(text);
+    }
+});
+
+</script>
+
+{{-- 
+@yield('ssss') --}}
 @endpush

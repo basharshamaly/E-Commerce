@@ -4,8 +4,12 @@
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
 		<title>@yield('title')</title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
 		<!-- Site favicon -->
 		<meta name="csrf-token" content="{{ csrf_token() }}">
+        {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+
 		<link
 			rel="icon"
 			type="image/png"
@@ -51,7 +55,9 @@ rel="stylesheet"
            <link rel="stylesheet" href="/extra-assets/jquery-ui-1.14.1/jquery-ui.structure.css">
            <link rel="stylesheet" href="/extra-assets/jquery-ui-1.14.1/jquery-ui.structure.min.css">
            <link rel="stylesheet" href="/extra-assets/jquery-ui-1.14.1/jquery-ui.theme.min.css">
-        @livewireStyles
+
+           @kropifyStyles
+           @livewireStyles
 
 
         <style>
@@ -532,8 +538,8 @@ rel="stylesheet"
 								><span class="mtext">Invoice</span>
 							</a>
 						</li> --}}
-						
-{{-- 
+
+{{--
 						<li>
 							<div class="sidebar-small-cap">Settings</div>
 						</li> --}}
@@ -630,6 +636,8 @@ rel="stylesheet"
                 }
             });
         </script>
+
+    @kropifyScripts
 
     @livewireScripts
 	@stack('scripts')

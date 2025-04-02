@@ -6,6 +6,17 @@
       0 => 'Cviebrock\\EloquentSluggable\\ServiceProvider',
     ),
   ),
+  'intervention/image' => 
+  array (
+    'aliases' => 
+    array (
+      'Image' => 'Intervention\\Image\\Facades\\Image',
+    ),
+    'providers' => 
+    array (
+      0 => 'Intervention\\Image\\ImageServiceProvider',
+    ),
+  ),
   'laravel/sail' => 
   array (
     'providers' => 
@@ -57,6 +68,13 @@
     'providers' => 
     array (
       0 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    ),
+  ),
+  'sawastacks/kropify-laravel' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'SawaStacks\\Utils\\KropifyServiceProvider',
     ),
   ),
   'spatie/laravel-ignition' => 

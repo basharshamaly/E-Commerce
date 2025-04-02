@@ -181,10 +181,13 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        SawaStacks\Utils\KropifyServiceProvider::class,
 
         /*
          * Package Service Providers...
          */
+
+
 
         /*
          * Application Service Providers...
@@ -212,7 +215,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
- 
+
 
 
 ];

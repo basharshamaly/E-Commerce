@@ -4,8 +4,12 @@
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
 		<title><?php echo $__env->yieldContent('title'); ?></title>
+        <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+
 		<!-- Site favicon -->
 		<meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+        
+
 		<link
 			rel="icon"
 			type="image/png"
@@ -51,7 +55,9 @@ rel="stylesheet"
            <link rel="stylesheet" href="/extra-assets/jquery-ui-1.14.1/jquery-ui.structure.css">
            <link rel="stylesheet" href="/extra-assets/jquery-ui-1.14.1/jquery-ui.structure.min.css">
            <link rel="stylesheet" href="/extra-assets/jquery-ui-1.14.1/jquery-ui.theme.min.css">
-        <?php echo \Livewire\Livewire::styles(); ?>
+
+           <link href="/vendors/sawastacks/kropify/css/kropify.min.css" rel="stylesheet">
+           <?php echo \Livewire\Livewire::styles(); ?>
 
 
 
@@ -239,15 +245,15 @@ rel="stylesheet"
              <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('admin-seller-header-profile-info')->html();
-} elseif ($_instance->childHasBeenRendered('PhKaupr')) {
-    $componentId = $_instance->getRenderedChildComponentId('PhKaupr');
-    $componentTag = $_instance->getRenderedChildComponentTagName('PhKaupr');
+} elseif ($_instance->childHasBeenRendered('Y3anGfm')) {
+    $componentId = $_instance->getRenderedChildComponentId('Y3anGfm');
+    $componentTag = $_instance->getRenderedChildComponentTagName('Y3anGfm');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('PhKaupr');
+    $_instance->preserveRenderedChild('Y3anGfm');
 } else {
     $response = \Livewire\Livewire::mount('admin-seller-header-profile-info');
     $html = $response->html();
-    $_instance->logRenderedChild('PhKaupr', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('Y3anGfm', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -259,15 +265,15 @@ echo $html;
                 <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('admin-seller-header-profile-info')->html();
-} elseif ($_instance->childHasBeenRendered('dT4xz2A')) {
-    $componentId = $_instance->getRenderedChildComponentId('dT4xz2A');
-    $componentTag = $_instance->getRenderedChildComponentTagName('dT4xz2A');
+} elseif ($_instance->childHasBeenRendered('65mNl8w')) {
+    $componentId = $_instance->getRenderedChildComponentId('65mNl8w');
+    $componentTag = $_instance->getRenderedChildComponentTagName('65mNl8w');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('dT4xz2A');
+    $_instance->preserveRenderedChild('65mNl8w');
 } else {
     $response = \Livewire\Livewire::mount('admin-seller-header-profile-info');
     $html = $response->html();
-    $_instance->logRenderedChild('dT4xz2A', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('65mNl8w', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -545,7 +551,7 @@ echo $html;
 							</a>
 						</li>
 						
-						
+
 
 
 
@@ -626,6 +632,8 @@ echo $html;
                 }
             });
         </script>
+
+    <script src="/vendors/sawastacks/kropify/js/kropify.min.js"></script>
 
     <?php echo \Livewire\Livewire::scripts(); ?>
 

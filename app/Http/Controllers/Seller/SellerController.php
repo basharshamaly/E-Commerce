@@ -12,9 +12,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use SawaStacks\Utils\Kropify;
+use App\Helpers\MyKropify;
 
 
 class SellerController extends Controller
@@ -359,5 +362,46 @@ class SellerController extends Controller
     public function profileSeller()
     {
         return view('back.pages.seller.profile');
+    }
+
+
+
+    public function updatedSellerProfilePicture(Request $request)
+    {
+        if (!$request->hasFile('sellerProfilePictureFile')) {
+            return response()->json(['status' => 0, 'msg' => 'لم يتم اختيار أي صورة 👀']);
+        }
+
+        $file = $request->file('sellerProfilePictureFile');
+
+        if (!$file || !$file->isValid()) {
+            return response()->json(['status' => 0, 'msg' => 'الملف غير صالح ❌']);
+        }
+
+        $seller = Seller::findOrFail(auth('seller')->id());
+
+        $path = public_path('/images/sellers/');
+        $filename = 'SELLER_IMG_' . $seller->id . '.jpg';
+        $old_picture = $seller->picture ?? null;
+
+        $upload = Kropify::getFile($file, $filename)
+            ->maxWoH(325)
+            ->save($path);
+
+        $infos = Kropify::getInfo();
+
+        if ($upload) {
+            if ($old_picture && File::exists($path . $old_picture)) {
+                File::delete($path . $old_picture);
+            }
+
+            $seller->update([
+                'picture' => $infos->getName,
+            ]);
+
+            return response()->json(['status' => 1, 'msg' => 'تم تحديث الصورة بنجاح ✅']);
+        }
+
+        return response()->json(['status' => 0, 'msg' => 'فشل في تحديث الصورة 😢']);
     }
 }
